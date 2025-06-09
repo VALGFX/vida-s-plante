@@ -16,10 +16,28 @@ interface Product {
 type SortType = 'relevant' | 'low-high' | 'high-low';
 
 const Collection: React.FC = () => {
-    // Produse fictive
+    // 20 produse fictive cu imagini
     const products: Product[] = [
         { id: '1', name: 'Fontana Acquario Piccola', category: 'Acquario', type: 'Estivo', price: 95, image: '/images/fountain1.jpg' },
-        // ... restul produselor
+        { id: '2', name: 'Laghetto Classico', category: 'Stagni', type: 'Invernale', price: 120, image: '/images/fountain2.jpg' },
+        { id: '3', name: 'Sorgente Cristallo', category: 'Acquario', type: 'Estivo', price: 85, image: '/images/fountain3.jpg' },
+        { id: '4', name: 'Oasi Verde', category: 'Stagni', type: 'Estivo', price: 110, image: '/images/fountain4.jpg' },
+        { id: '5', name: 'Fontana Mediterranea', category: 'Acquario', type: 'Invernale', price: 130, image: '/images/fountain5.jpg' },
+        { id: '6', name: 'Laguna Blu', category: 'Stagni', type: 'Estivo', price: 150, image: '/images/fountain6.jpg' },
+        { id: '7', name: 'Acqua Viva', category: 'Acquario', type: 'Invernale', price: 90, image: '/images/fountain7.jpg' },
+        { id: '8', name: 'Stagno delle Ninfee', category: 'Stagni', type: 'Invernale', price: 140, image: '/images/fountain8.jpg' },
+        { id: '9', name: 'Fonte di Luce', category: 'Acquario', type: 'Estivo', price: 100, image: '/images/fountain9.jpg' },
+        { id: '10', name: 'Laghetto Sereno', category: 'Stagni', type: 'Estivo', price: 115, image: '/images/fountain10.jpg' },
+        { id: '11', name: 'Fontana dei Sogni', category: 'Acquario', type: 'Invernale', price: 125, image: '/images/fountain11.jpg' },
+        { id: '12', name: 'Oasi d\'Acqua', category: 'Stagni', type: 'Estivo', price: 135, image: '/images/fountain12.jpg' },
+        { id: '13', name: 'Sorgente Pura', category: 'Acquario', type: 'Estivo', price: 105, image: '/images/fountain13.jpg' },
+        { id: '14', name: 'Laghetto d\'Argento', category: 'Stagni', type: 'Invernale', price: 145, image: '/images/fountain14.jpg' },
+        { id: '15', name: 'Fontana del Sole', category: 'Acquario', type: 'Invernale', price: 155, image: '/images/fountain15.jpg' },
+        { id: '16', name: 'Laguna Cristallina', category: 'Stagni', type: 'Estivo', price: 165, image: '/images/fountain16.jpg' },
+        { id: '17', name: 'Acqua Serena', category: 'Acquario', type: 'Estivo', price: 115, image: '/images/fountain17.jpg' },
+        { id: '18', name: 'Stagno Tranquillo', category: 'Stagni', type: 'Invernale', price: 175, image: '/images/fountain18.jpg' },
+        { id: '19', name: 'Fonte Arcobaleno', category: 'Acquario', type: 'Invernale', price: 185, image: '/images/fountain19.jpg' },
+        { id: '20', name: 'Laghetto Dorato', category: 'Stagni', type: 'Estivo', price: 195, image: '/images/fountain20.jpg' },
     ];
 
     const [filterCategory, setFilterCategory] = useState<string[]>([]);
@@ -185,13 +203,14 @@ const Collection: React.FC = () => {
                     margin-top: 90px;
                     display: flex;
                     flex-direction: column;
-                    max-width: 80%;
+                    max-width: 1200px;
                     gap: 32px;
                     border-radius: 20px;
                     background-color: #f7f8f7;
                     width: 100%;
-                    margin: 80px auto;
-                    padding: 40px 8px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding: 40px 16px;
                 }
                 @media(min-width: 768px) {
                     .container {
@@ -204,23 +223,23 @@ const Collection: React.FC = () => {
                     max-width: 280px;
                     margin-bottom: 32px;
                     flex-shrink: 0;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+                    background: white;
+                    border-radius: 24px;
                 }
                 @media(min-width: 768px) {
                     .sidebar {
                         margin-bottom: 0;
+                        position: sticky;
+                        top: 112px;
+                        height: fit-content;
                     }
                 }
                 .filter-box {
-                    background-color: white;
-                    border-radius: 24px;
                     padding: 24px;
-                    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-                    0 4px 6px -4px rgb(0 0 0 / 0.1);
                     display: flex;
                     flex-direction: column;
                     gap: 24px;
-                    position: sticky;
-                    top: 112px;
                 }
                 .filter-title {
                     font-size: 1.125rem;
@@ -285,7 +304,7 @@ const Collection: React.FC = () => {
                     background-color: white;
                     border-radius: 24px;
                     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-                    0 4px 6px -4px rgb(0 0 0 / 0.1);
+                                0 4px 6px -4px rgb(0 0 0 / 0.1);
                     padding: 32px;
                     display: flex;
                     flex-direction: column;
@@ -295,6 +314,8 @@ const Collection: React.FC = () => {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    flex-wrap: wrap;
+                    gap: 12px;
                 }
                 .title {
                     font-weight: 700;
@@ -309,21 +330,32 @@ const Collection: React.FC = () => {
                     cursor: pointer;
                     outline: none;
                     background-color: white;
-                    transition: border-color 0.2s ease;
+                    transition: border-color 0.3s ease;
                 }
                 .sort-select:hover,
                 .sort-select:focus {
-                    border-color: #6b7280;
+                    border-color: #2563eb;
                 }
                 .product-grid {
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    gap: 16px;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 24px;
+                }
+                @media (min-width: 768px) {
+                    .product-grid {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+                }
+                @media (min-width: 1024px) {
+                    .product-grid {
+                        grid-template-columns: repeat(4, 1fr);
+                    }
                 }
                 .empty-message {
-                    font-style: italic;
                     color: #6b7280;
-                    font-weight: 500;
+                    font-size: 1rem;
+                    text-align: center;
+                    padding: 32px 0;
                 }
             `}</style>
         </>
