@@ -1,44 +1,71 @@
-'use client';
+'use client'
 
-import { useContext, useEffect, useState } from 'react';
-import { ShopContext } from '@/context/ShopContext';
-import ProductItem from './ProductItem';
+import React from 'react'
+import ProductItem from './ProductItem'
 
 const LatestCollection: React.FC = () => {
-    const { products } = useContext(ShopContext)!;
-    const [latestProducts, setLatestProducts] = useState(products.slice(0, 10));
+  // Date statice de exemplu (mock)
+  const latestProducts = [
+    {
+      _id: '1',
+      name: 'Prodotto 1',
+      image: ['https://via.placeholder.com/300'],
+      price: 49.99,
+    },
+    {
+      _id: '2',
+      name: 'Prodotto 2',
+      image: ['https://via.placeholder.com/300'],
+      price: 59.99,
+    },
+    {
+      _id: '3',
+      name: 'Prodotto 3',
+      image: ['https://via.placeholder.com/300'],
+      price: 39.99,
+    },
+    {
+      _id: '4',
+      name: 'Prodotto 4',
+      image: ['https://via.placeholder.com/300'],
+      price: 29.99,
+    },
+    {
+      _id: '5',
+      name: 'Prodotto 5',
+      image: ['https://via.placeholder.com/300'],
+      price: 79.99,
+    },
+    // ... mai poți adăuga produse mock dacă vrei
+  ]
 
-    useEffect(() => {
-        setLatestProducts(products.slice(0, 10));
-    }, [products]);
+  return (
+    <section className="latest-collection">
+      <header className="header">
+        <h2 className="title">
+          PRODOTTI <span className="highlight">PIÙ POPOLARI</span>
+        </h2>
+        <p className="subtitle">
+          Il prodotto più venduto<br />
+          <span className="week">Questa settimana!</span>
+        </p>
+      </header>
 
-    return (
-        <section className="latest-collection">
-            <header className="header">
-                <h2 className="title">
-                    PRODOTTI <span className="highlight">PIÙ POPOLARI</span>
-                </h2>
-                <p className="subtitle">
-                    Il prodotto più venduto<br />
-                    <span className="week">Questa settimana!</span>
-                </p>
-            </header>
+      <hr className="divider" />
 
-            <hr className="divider" />
+      <div className="grid">
+        {latestProducts.map((item) => (
+          <ProductItem
+            key={item._id}
+            id={item._id}
+            image={item.image}
+            name={item.name}
+            price={item.price}
+          />
+        ))}
+      </div>
 
-            <div className="grid">
-                {latestProducts.map((item) => (
-                    <ProductItem
-                        key={item._id}
-                        id={item._id}
-                        image={item.image}
-                        name={item.name}
-                        price={item.price}
-                    />
-                ))}
-            </div>
-
-            <style jsx>{`
+      <style jsx>{`
         .latest-collection {
           background-color: #F2F3F2; /* Very light gray */
           max-width: 80%;
@@ -118,8 +145,8 @@ const LatestCollection: React.FC = () => {
           }
         }
       `}</style>
-        </section>
-    );
-};
+    </section>
+  )
+}
 
-export default LatestCollection;
+export default LatestCollection
