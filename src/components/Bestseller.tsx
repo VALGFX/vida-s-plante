@@ -1,54 +1,78 @@
 'use client';
 
-import React, { useContext, useEffect, useState } from 'react';
-import { ShopContext } from '@/context/ShopContext'; // Asigură-te că ai exportat Product
+import React from 'react';
 import ProductItem from './ProductItem';
 
+const fakeProducts = [
+  {
+    _id: '1',
+    name: 'Produs Bestseller 1',
+    image: ['/images/product1.jpg'],
+    price: 120,
+  },
+  {
+    _id: '2',
+    name: 'Produs Bestseller 2',
+    image: ['/images/product2.jpg'],
+    price: 90,
+  },
+  {
+    _id: '3',
+    name: 'Produs Bestseller 3',
+    image: ['/images/product3.jpg'],
+    price: 150,
+  },
+  {
+    _id: '4',
+    name: 'Produs Bestseller 4',
+    image: ['/images/product4.jpg'],
+    price: 80,
+  },
+  {
+    _id: '5',
+    name: 'Produs Bestseller 5',
+    image: ['/images/product5.jpg'],
+    price: 110,
+  },
+];
+
 const BestSeller: React.FC = () => {
-    const { products } = useContext(ShopContext)!;
-    const [bestSeller, setBestSeller] = useState<Product[]>([]);
+  return (
+    <div className="container">
+      {/* Header */}
+      <div className="header">
+        <div>
+          <h2>
+            PRODOTTI <span>PIÙ VENDUTI</span>
+          </h2>
+        </div>
+        <div>
+          <button>Vedi i prodotti</button>
+        </div>
+      </div>
 
-    useEffect(() => {
-        const bestProduct = products.filter(item => item.bestseller);
-        setBestSeller(bestProduct.slice(0, 5));
-    }, [products]);
+      <hr />
 
-    return (
-        <div className="container">
-            {/* Header */}
-            <div className="header">
-                <div>
-                    <h2>
-                        PRODOTTI <span>PIÙ VENDUTI</span>
-                    </h2>
-                </div>
-                <div>
-                    <button>Vedi i prodotti</button>
-                </div>
-            </div>
+      {/* Grid produse */}
+      <div className="grid">
+        {fakeProducts.map((item) => (
+          <ProductItem
+            key={item._id}
+            id={item._id}
+            name={item.name}
+            image={item.image}
+            price={item.price}
+          />
+        ))}
+      </div>
 
-            <hr />
-
-            {/* Grid produse */}
-            <div className="grid">
-                {bestSeller.map((item) => (
-                    <ProductItem
-                        key={item._id}
-                        id={item._id}
-                        name={item.name}
-                        image={item.image}
-                        price={item.price}
-                    />
-                ))}
-            </div>
-
-            <style jsx>{`
+      <style jsx>{`
         .container {
-          background-color: #F2F3F2; /* gray-100 */
+          background-color: #f2f3f2;
           border-radius: 20px;
           padding: 2rem;
           margin: 2.5rem auto;
-            max-width: 80%;
+          max-width: 80%;
         }
 
         .header {
@@ -71,13 +95,13 @@ const BestSeller: React.FC = () => {
         h2 {
           font-weight: 800;
           font-size: 2rem;
-          color: #1f2937; /* gray-800 */
+          color: #1f2937;
           margin: 0;
         }
 
         h2 span {
           font-weight: 400;
-          color: #6b7280; /* gray-500 */
+          color: #6b7280;
         }
 
         button {
@@ -92,11 +116,11 @@ const BestSeller: React.FC = () => {
         }
 
         button:hover {
-          background-color: #374151; /* gray-800 */
+          background-color: #374151;
         }
 
         hr {
-          border: 1px solid #d1d5db; /* gray-300 */
+          border: 1px solid #d1d5db;
           margin-bottom: 2rem;
         }
 
@@ -124,8 +148,8 @@ const BestSeller: React.FC = () => {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default BestSeller;
