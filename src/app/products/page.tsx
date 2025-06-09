@@ -19,7 +19,7 @@ const Collection: React.FC = () => {
     // Produse fictive
     const products: Product[] = [
         { id: '1', name: 'Fontana Acquario Piccola', category: 'Acquario', type: 'Estivo', price: 95, image: '/images/fountain1.jpg' },
-        // ... restul produselor (ca în exemplul tău)
+        // ... restul produselor
     ];
 
     const [filterCategory, setFilterCategory] = useState<string[]>([]);
@@ -79,7 +79,13 @@ const Collection: React.FC = () => {
                                 aria-expanded={openCategory}
                                 aria-controls="category-filter"
                             >
-                                Categorii <span className={openCategory ? 'arrow open' : 'arrow'}>▶</span>
+                                Categorii{' '}
+                                <img
+                                    src="/images/icons/arrow-up.svg"
+                                    alt={openCategory ? 'Arrow up' : 'Arrow right'}
+                                    className={openCategory ? 'arrow open' : 'arrow'}
+                                    style={{ width: '16px', height: '16px', transition: 'transform 0.3s ease' }}
+                                />
                             </button>
                         </h2>
                         <div id="category-filter" className={`checkbox-group ${openCategory ? 'open' : ''}`}>
@@ -110,7 +116,13 @@ const Collection: React.FC = () => {
                                 aria-expanded={openType}
                                 aria-controls="type-filter"
                             >
-                                Tipuri <span className={openType ? 'arrow open' : 'arrow'}>▶</span>
+                                Tipuri{' '}
+                                <img
+                                    src="/images/icons/arrow-up.svg"
+                                    alt={openType ? 'Arrow up' : 'Arrow right'}
+                                    className={openType ? 'arrow open' : 'arrow'}
+                                    style={{ width: '16px', height: '16px', transition: 'transform 0.3s ease' }}
+                                />
                             </button>
                         </h2>
                         <div id="type-filter" className={`checkbox-group ${openType ? 'open' : ''}`}>
@@ -169,154 +181,151 @@ const Collection: React.FC = () => {
             </div>
 
             <style jsx>{`
-        .container {
-          margin-top: 90px;
-          display: flex;
-          flex-direction: column;
-          max-width: 80%;
-          gap: 32px;
-          border-radius: 20px;
-          background-color: #f7f8f7;
-          width: 100%;
-          margin: 80px auto;
-          padding: 40px 8px;
-        }
-        @media(min-width: 768px) {
-          .container {
-            flex-direction: row;
-            padding: 40px 40px;
-          }
-        }
-        .sidebar {
-          width: 100%;
-          max-width: 280px;
-          margin-bottom: 32px;
-          flex-shrink: 0;
-        }
-        @media(min-width: 768px) {
-          .sidebar {
-            margin-bottom: 0;
-          }
-        }
-        .filter-box {
-          background-color: white;
-          border-radius: 24px;
-          padding: 24px;
-          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-                      0 4px 6px -4px rgb(0 0 0 / 0.1);
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-          position: sticky;
-          top: 112px;
-        }
-        .filter-title {
-          font-size: 1.125rem;
-          font-weight: 600;
-          letter-spacing: 0.025em;
-          margin-bottom: 8px;
-          color: #1f2937;
-        }
-        .filter-toggle {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          text-align: left;
-          font-weight: 500;
-          color: #4b5563;
-          margin-bottom: 8px;
-          background: none;
-          border: none;
-          padding: 0;
-          cursor: pointer;
-          user-select: none;
-        }
-        .filter-toggle span {
-          display: inline-block;
-          transition: transform 0.3s ease;
-        }
-        .arrow {
-          transform: rotate(0deg);
-        }
-        .arrow.open {
-          transform: rotate(90deg);
-        }
-        .checkbox-group {
-          display: none;
-          flex-direction: column;
-          gap: 12px;
-          background-color: #f7f8f7;
-          border-radius: 12px;
-          padding: 12px;
-        }
-        .checkbox-group.open {
-          display: flex;
-        }
-        .checkbox-label {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          color: #4b5563;
-          font-size: 0.875rem;
-          font-weight: 400;
-          cursor: pointer;
-        }
-        .checkbox-label input[type='checkbox'] {
-          accent-color: #111;
-          border-radius: 0.25rem;
-          cursor: pointer;
-          width: 18px;
-          height: 18px;
-        }
-        .main {
-          flex: 1;
-        }
-        .catalog-box {
-          background-color: white;
-          border-radius: 24px;
-          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-                      0 4px 6px -4px rgb(0 0 0 / 0.1);
-          padding: 32px;
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-        }
-        .header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        .title {
-          font-weight: 700;
-          font-size: 2rem;
-          color: #111827;
-        }
-        .sort-select {
-          border: 1px solid #d1d5db;
-          padding: 8px 12px;
-          border-radius: 8px;
-          font-size: 1rem;
-          cursor: pointer;
-          outline: none;
-          background-color: white;
-          transition: border-color 0.2s ease;
-        }
-        .sort-select:hover,
-        .sort-select:focus {
-          border-color: #6b7280;
-        }
-        .product-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 16px;
-        }
-        .empty-message {
-          font-style: italic;
-          color: #6b7280;
-          font-weight: 500;
-        }
-      `}</style>
+                .container {
+                    margin-top: 90px;
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 80%;
+                    gap: 32px;
+                    border-radius: 20px;
+                    background-color: #f7f8f7;
+                    width: 100%;
+                    margin: 80px auto;
+                    padding: 40px 8px;
+                }
+                @media(min-width: 768px) {
+                    .container {
+                        flex-direction: row;
+                        padding: 40px 40px;
+                    }
+                }
+                .sidebar {
+                    width: 100%;
+                    max-width: 280px;
+                    margin-bottom: 32px;
+                    flex-shrink: 0;
+                }
+                @media(min-width: 768px) {
+                    .sidebar {
+                        margin-bottom: 0;
+                    }
+                }
+                .filter-box {
+                    background-color: white;
+                    border-radius: 24px;
+                    padding: 24px;
+                    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+                    0 4px 6px -4px rgb(0 0 0 / 0.1);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 24px;
+                    position: sticky;
+                    top: 112px;
+                }
+                .filter-title {
+                    font-size: 1.125rem;
+                    font-weight: 600;
+                    letter-spacing: 0.025em;
+                    margin-bottom: 8px;
+                    color: #1f2937;
+                }
+                .filter-toggle {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    text-align: left;
+                    font-weight: 500;
+                    color: #4b5563;
+                    margin-bottom: 8px;
+                    background: none;
+                    border: none;
+                    padding: 0;
+                    cursor: pointer;
+                    user-select: none;
+                }
+                .arrow {
+                    transform: rotate(0deg);
+                    transition: transform 0.3s ease;
+                }
+                .arrow.open {
+                    transform: rotate(90deg);
+                }
+                .checkbox-group {
+                    display: none;
+                    flex-direction: column;
+                    gap: 12px;
+                    background-color: #f7f8f7;
+                    border-radius: 12px;
+                    padding: 12px;
+                }
+                .checkbox-group.open {
+                    display: flex;
+                }
+                .checkbox-label {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    color: #4b5563;
+                    font-size: 0.875rem;
+                    font-weight: 400;
+                    cursor: pointer;
+                }
+                .checkbox-label input[type='checkbox'] {
+                    accent-color: #111;
+                    border-radius: 0.25rem;
+                    cursor: pointer;
+                    width: 18px;
+                    height: 18px;
+                }
+                .main {
+                    flex: 1;
+                }
+                .catalog-box {
+                    background-color: white;
+                    border-radius: 24px;
+                    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+                    0 4px 6px -4px rgb(0 0 0 / 0.1);
+                    padding: 32px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 24px;
+                }
+                .header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .title {
+                    font-weight: 700;
+                    font-size: 2rem;
+                    color: #111827;
+                }
+                .sort-select {
+                    border: 1px solid #d1d5db;
+                    padding: 8px 12px;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    outline: none;
+                    background-color: white;
+                    transition: border-color 0.2s ease;
+                }
+                .sort-select:hover,
+                .sort-select:focus {
+                    border-color: #6b7280;
+                }
+                .product-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 16px;
+                }
+                .empty-message {
+                    font-style: italic;
+                    color: #6b7280;
+                    font-weight: 500;
+                }
+            `}</style>
         </>
     );
 };
