@@ -2,10 +2,6 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
-interface ProductPageProps {
-  params: { id: string }
-}
-
 const DUMMY_PRODUCTS = [
   {
     id: '1',
@@ -23,7 +19,7 @@ const DUMMY_PRODUCTS = [
   },
 ]
 
-const ProductPage = async ({ params }: ProductPageProps) => {
+export default async function ProductPage({ params }: { params: { id: string } }) {
   const product = DUMMY_PRODUCTS.find((p) => p.id === params.id)
 
   if (!product) return notFound()
@@ -51,5 +47,3 @@ const ProductPage = async ({ params }: ProductPageProps) => {
     </div>
   )
 }
-
-export default ProductPage
