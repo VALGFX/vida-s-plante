@@ -56,13 +56,13 @@ const BestSeller: React.FC = () => {
       {/* Grid produse */}
       <div className="grid">
         {fakeProducts.map((item) => (
-          <ProductItem
-            key={item._id}
-            id={item._id}
-            name={item.name}
-            image={item.image}
-            price={item.price}
-          />
+         <ProductItem key={item._id} item={{
+  id: item._id,
+  name: item.name,
+  image: item.image,
+  price: item.price
+}} />
+
         ))}
       </div>
 
