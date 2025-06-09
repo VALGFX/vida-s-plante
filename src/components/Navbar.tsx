@@ -4,7 +4,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
-import SignInPage from "@/app/auth/register/page";
 
 const Navbar: FC = () => {
     const pathname = usePathname()
