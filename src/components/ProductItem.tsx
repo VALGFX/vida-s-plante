@@ -52,7 +52,12 @@ const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
           <img
             src={item.image[0]}
             alt={item.name}
-            className="object-contain w-full h-full rounded-2xl"
+            style={{
+  objectFit: 'contain',
+  width: '100%',
+  height: '100%',
+  borderRadius: '1rem' // echivalent cu Tailwind 'rounded-2xl'
+}}
             loading="lazy"
           />
         </div>
