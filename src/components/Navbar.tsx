@@ -49,13 +49,13 @@ const Navbar: FC = () => {
                     Home
                 </Link>
                 <Link href="/products" style={linkStyle('/products')}>
-                    Products
+                    Prodotti
                 </Link>
                 <Link href="/about" style={linkStyle('/about')}>
-                    About
+                    Chi siamo
                 </Link>
                 <Link href="/contact" style={linkStyle('/contact')}>
-                    Contact
+                    Contatto
                 </Link>
             </div>
 
