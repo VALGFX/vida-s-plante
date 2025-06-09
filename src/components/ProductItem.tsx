@@ -1,3 +1,7 @@
+// src/components/ProductItem.tsx
+'use client';
+import Link from 'next/link';
+
 interface ProductItemProps {
   item: {
     id: string;
@@ -54,5 +58,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
         </div>
       </a>
     </Link>
-  )
-}
+  );
+};
+
+export default ProductItem;
