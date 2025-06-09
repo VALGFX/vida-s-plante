@@ -140,7 +140,7 @@ const LatestCollection: React.FC = () => {
 
         @media (min-width: 1024px) {
           .grid {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
           }
         }
       `}</style>
