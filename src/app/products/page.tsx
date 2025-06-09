@@ -6,19 +6,27 @@ import ProductItem from '@/components/ProductItem';
 import { ShopContext } from '@/context/ShopContext';
 import Navbar from "@/components/Navbar";
 
+interface Product {
+  id: string;
+  name: string;
+  category: string;
+  type: string;
+  price: number;
+  image: string[];
+}
+
 const Container = styled.div`
   margin-top: 90px;
   display: flex;
   flex-direction: column;
-    max-width: 80%;
+  max-width: 80%;
   gap: 32px;
-    border-radius: 20px;
+  border-radius: 20px;
   background-color: #f7f8f7;
-    width: 100%;
-    max-width: 80%;
-    margin: 80px auto;
+  width: 100%;
+  margin: 80px auto;
   padding: 40px 8px;
-  
+
   @media(min-width: 768px) {
     flex-direction: row;
     padding: 40px 40px;
@@ -175,165 +183,165 @@ const EmptyMessage = styled.p`
 `;
 
 const Collection: React.FC = () => {
-    const { products, search, showSearch } = useContext(ShopContext)!;
+  const { products, search, showSearch } = useContext(ShopContext)!;
 
-    const [category, setCategory] = useState<string[]>([]);
-    const [type, setType] = useState<string[]>([]);
-    const [sortType, setSortType] = useState<'relavent' | 'low-high' | 'high-low'>('relavent');
-    const [filterProducts, setFilterProducts] = useState<Product[]>([]);
+  const [category, setCategory] = useState<string[]>([]);
+  const [type, setType] = useState<string[]>([]);
+  const [sortType, setSortType] = useState<'relavent' | 'low-high' | 'high-low'>('relavent');
+  const [filterProducts, setFilterProducts] = useState<Product[]>([]);
 
-    const [openCategory, setOpenCategory] = useState<boolean>(true);
-    const [openType, setOpenType] = useState<boolean>(true);
+  const [openCategory, setOpenCategory] = useState<boolean>(true);
+  const [openType, setOpenType] = useState<boolean>(true);
 
-    const toggleCategory = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setCategory(prev =>
-            prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
-        );
-    };
-
-    const toggleType = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setType(prev =>
-            prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
-        );
-    };
-
-    const applyFilter = () => {
-        let filtered = [...products];
-
-        if (showSearch && search) {
-            filtered = filtered.filter(item =>
-                item.name.toLowerCase().includes(search.toLowerCase())
-            );
-        }
-
-        if (category.length > 0) {
-            filtered = filtered.filter(item => category.includes(item.category));
-        }
-
-        if (type.length > 0) {
-            filtered = filtered.filter(item => type.includes(item.type));
-        }
-
-        setFilterProducts(filtered);
-    };
-
-    const sortProduct = () => {
-        let sorted = [...filterProducts];
-        if (sortType === 'low-high') sorted.sort((a, b) => a.price - b.price);
-        else if (sortType === 'high-low') sorted.sort((a, b) => b.price - a.price);
-        setFilterProducts(sorted);
-    };
-
-    useEffect(() => {
-        applyFilter();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [category, type, search, showSearch, products]);
-
-    useEffect(() => {
-        sortProduct();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortType]);
-
-    return (
-        <>
-            <Navbar />
-            <Container>
-                <Sidebar>
-                    <FilterBox>
-                        <FilterTitle>FILTRO</FilterTitle>
-
-                        <div>
-                            <FilterToggleButton onClick={() => setOpenCategory(v => !v)} open={openCategory}>
-                                CATEGORIA
-                                <span>
-                                  <svg width="16" height="16" fill="none" aria-hidden="true" focusable="false">
-                                    <path
-                                        d="M6 12l4-4-4-4"
-                                        stroke="#222"
-                                        strokeWidth={2}
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                  </svg>
-                                </span>
-                            </FilterToggleButton>
-                            <CheckboxGroup open={openCategory}>
-                                {['Acquario', 'Stagni'].map(cat => (
-                                    <CheckboxLabel key={cat}>
-                                        <input
-                                            type="checkbox"
-                                            value={cat}
-                                            checked={category.includes(cat)}
-                                            onChange={toggleCategory}
-                                        />
-                                        {cat}
-                                    </CheckboxLabel>
-                                ))}
-                            </CheckboxGroup>
-                        </div>
-
-                        <div>
-                            <FilterToggleButton onClick={() => setOpenType(v => !v)} open={openType}>
-                                TIPO
-                                <span>
-                                  <svg width="16" height="16" fill="none" aria-hidden="true" focusable="false">
-                                    <path
-                                        d="M6 12l4-4-4-4"
-                                        stroke="#222"
-                                        strokeWidth={2}
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                  </svg>
-                                </span>
-                            </FilterToggleButton>
-                            <CheckboxGroup open={openType}>
-                                {['Estivo', 'Invernale'].map(tp => (
-                                    <CheckboxLabel key={tp}>
-                                        <input
-                                            type="checkbox"
-                                            value={tp}
-                                            checked={type.includes(tp)}
-                                            onChange={toggleType}
-                                        />
-                                        {tp}
-                                    </CheckboxLabel>
-                                ))}
-                            </CheckboxGroup>
-                        </div>
-                    </FilterBox>
-                </Sidebar>
-
-                <Main>
-                    <CatalogBox>
-                        <Header>
-                            <Title>Catalogo</Title>
-                            <SortSelect
-                                value={sortType}
-                                onChange={e => setSortType(e.target.value as any)}
-                            >
-                                <option value="relavent">Ordina per</option>
-                                <option value="low-high">Prezzo crescente</option>
-                                <option value="high-low">Prezzo decrescente</option>
-                            </SortSelect>
-                        </Header>
-
-                        <ProductGrid>
-                            {filterProducts.length > 0 ? (
-                                filterProducts.map(item => (
-                                    <ProductItem key={item.id} item={item} />
-                                ))
-                            ) : (
-                                <EmptyMessage>Nessun prodotto trovato</EmptyMessage>
-                            )}
-                        </ProductGrid>
-                    </CatalogBox>
-                </Main>
-            </Container>
-        </>
+  const toggleCategory = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setCategory(prev =>
+      prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
     );
+  };
+
+  const toggleType = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setType(prev =>
+      prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
+    );
+  };
+
+  const applyFilter = () => {
+    let filtered = [...products];
+
+    if (showSearch && search) {
+      filtered = filtered.filter(item =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    if (category.length > 0) {
+      filtered = filtered.filter(item => category.includes(item.category));
+    }
+
+    if (type.length > 0) {
+      filtered = filtered.filter(item => type.includes(item.type));
+    }
+
+    setFilterProducts(filtered);
+  };
+
+  const sortProduct = () => {
+    const sorted = [...filterProducts];
+    if (sortType === 'low-high') sorted.sort((a, b) => a.price - b.price);
+    else if (sortType === 'high-low') sorted.sort((a, b) => b.price - a.price);
+    setFilterProducts(sorted);
+  };
+
+  useEffect(() => {
+    applyFilter();
+  }, [category, type, search, showSearch, products]);
+
+  useEffect(() => {
+    sortProduct();
+  }, [sortType]);
+
+  return (
+    <>
+      <Navbar />
+      <Container>
+        <Sidebar>
+          <FilterBox>
+            <FilterTitle>FILTRO</FilterTitle>
+
+            <div>
+              <FilterToggleButton onClick={() => setOpenCategory(v => !v)} open={openCategory}>
+                CATEGORIA
+                <span>
+                  <svg width="16" height="16" fill="none" aria-hidden="true" focusable="false">
+                    <path
+                      d="M6 12l4-4-4-4"
+                      stroke="#222"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </FilterToggleButton>
+              <CheckboxGroup open={openCategory}>
+                {['Acquario', 'Stagni'].map(cat => (
+                  <CheckboxLabel key={cat}>
+                    <input
+                      type="checkbox"
+                      value={cat}
+                      checked={category.includes(cat)}
+                      onChange={toggleCategory}
+                    />
+                    {cat}
+                  </CheckboxLabel>
+                ))}
+              </CheckboxGroup>
+            </div>
+
+            <div>
+              <FilterToggleButton onClick={() => setOpenType(v => !v)} open={openType}>
+                TIPO
+                <span>
+                  <svg width="16" height="16" fill="none" aria-hidden="true" focusable="false">
+                    <path
+                      d="M6 12l4-4-4-4"
+                      stroke="#222"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </FilterToggleButton>
+              <CheckboxGroup open={openType}>
+                {['Estivo', 'Invernale'].map(tp => (
+                  <CheckboxLabel key={tp}>
+                    <input
+                      type="checkbox"
+                      value={tp}
+                      checked={type.includes(tp)}
+                      onChange={toggleType}
+                    />
+                    {tp}
+                  </CheckboxLabel>
+                ))}
+              </CheckboxGroup>
+            </div>
+          </FilterBox>
+        </Sidebar>
+
+        <Main>
+          <CatalogBox>
+            <Header>
+              <Title>Catalogo</Title>
+              <SortSelect
+                value={sortType}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                  setSortType(e.target.value as 'relavent' | 'low-high' | 'high-low')
+                }
+              >
+                <option value="relavent">Ordina per</option>
+                <option value="low-high">Prezzo crescente</option>
+                <option value="high-low">Prezzo decrescente</option>
+              </SortSelect>
+            </Header>
+
+            <ProductGrid>
+              {filterProducts.length > 0 ? (
+                filterProducts.map(item => (
+                  <ProductItem key={item.id} item={item} />
+                ))
+              ) : (
+                <EmptyMessage>Nessun prodotto trovato</EmptyMessage>
+              )}
+            </ProductGrid>
+          </CatalogBox>
+        </Main>
+      </Container>
+    </>
+  );
 };
 
 export default Collection;
