@@ -1,26 +1,30 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "target": "ES2017",                      // Versiune JS țintă (poate fi și ES2020 dacă dorești)
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Biblioteci disponibile (browser + ESNext)
+    "allowJs": true,                         // Permite fișiere JS în proiect (utile dacă ai și JS)
+    "skipLibCheck": true,                    // Sare verificarea tipurilor din node_modules (accelerează build-ul)
+    "strict": true,                         // Activează toate verificările stricte TS
+    "noEmit": true,                         // Nu emite fișiere JS (Next.js se ocupă de build)
+    "esModuleInterop": true,                // Pentru importuri compatibile CommonJS/ESModule
+    "module": "ESNext",                     // Modul ECMAScript pentru output (pentru Next.js e corect)
+    "moduleResolution": "Node",             // Rezolvarea modulelor în stil Node.js
+    "resolveJsonModule": true,               // Permite importarea fișierelor JSON
+    "isolatedModules": true,                 // Pentru suportul în tooling (babel, vite, etc)
+    "jsx": "preserve",                       // Nu transforma JSX (Next.js se ocupă)
+    "incremental": true,                     // Build incremental pentru viteză
+    "forceConsistentCasingInFileNames": true, // Ajută la evitarea erorilor cauzate de case-sensitivity
+    "noImplicitAny": true,                   // Nu permite tipul any implicit (mai sigur)
+    "strictNullChecks": true,                // Verificări stricte pentru null/undefined
+    "baseUrl": ".",                          // Baza pentru aliasuri (folder proiect)
+    "paths": {
+      "@/*": ["src/*"]                      // Alias pentru importuri relative din src/
+    },
     "plugins": [
       {
-        "name": "next"
+        "name": "next"                      // Plugin specific Next.js (optimizări)
       }
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
