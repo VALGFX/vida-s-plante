@@ -2,8 +2,6 @@
 
 import React from 'react'
 import ProductItem from './ProductItem'
-import Image from 'next/image'
-
 
 const LatestCollection: React.FC = () => {
   // Date statice de exemplu (mock)
