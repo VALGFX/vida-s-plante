@@ -2,7 +2,8 @@
 import React from 'react'
 import Navbar from '@/components/Navbar'
 
-const ProfilePage = (): JSX.Element => {
+const ProfilePage: React.FC = () => {
+
     return (
         <>
             <Navbar />
