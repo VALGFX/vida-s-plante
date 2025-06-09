@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useContext, useEffect, useState } from 'react';
-import { ShopContext, Product } from '@/context/ShopContext'; // Asigură-te că ai exportat Product
+import { ShopContext } from '@/context/ShopContext'; // Asigură-te că ai exportat Product
 import ProductItem from './ProductItem';
 
 const BestSeller: React.FC = () => {
