@@ -13,7 +13,7 @@ interface ProductItemProps {
 
 const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
   return (
-    <Link href={`/product/${item.id}`} passHref>
+    <Link href={`/products/${item.id}`} passHref>
       <a className="group block bg-white rounded-3xl p-5 flex flex-col gap-5 shadow-sm border border-gray-100 max-w-xs mx-auto transition-colors duration-500 hover:bg-[#B5C9B6] cursor-pointer">
         <div className="flex items-start justify-between">
           <h3 className="text-lg font-semibold text-gray-900 leading-tight max-w-[80%]">
