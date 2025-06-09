@@ -29,9 +29,9 @@ const Collection: React.FC = () => {
         { id: '9', name: 'Fonte di Luce', category: 'Acquario', type: 'Estivo', price: 100, image: '/images/fountain9.jpg' },
         { id: '10', name: 'Laghetto Sereno', category: 'Stagni', type: 'Estivo', price: 115, image: '/images/fountain10.jpg' },
         { id: '11', name: 'Fontana dei Sogni', category: 'Acquario', type: 'Invernale', price: 125, image: '/images/fountain11.jpg' },
-        { id: '12', name: 'Oasi d\'Acqua', category: 'Stagni', type: 'Estivo', price: 135, image: '/images/fountain12.jpg' },
+        { id: '12', name: "Oasi d'Acqua", category: 'Stagni', type: 'Estivo', price: 135, image: '/images/fountain12.jpg' },
         { id: '13', name: 'Sorgente Pura', category: 'Acquario', type: 'Estivo', price: 105, image: '/images/fountain13.jpg' },
-        { id: '14', name: 'Laghetto d\'Argento', category: 'Stagni', type: 'Invernale', price: 145, image: '/images/fountain14.jpg' },
+        { id: '14', name: "Laghetto d'Argento", category: 'Stagni', type: 'Invernale', price: 145, image: '/images/fountain14.jpg' },
         { id: '15', name: 'Fontana del Sole', category: 'Acquario', type: 'Invernale', price: 155, image: '/images/fountain15.jpg' },
         { id: '16', name: 'Laguna Cristallina', category: 'Stagni', type: 'Estivo', price: 165, image: '/images/fountain16.jpg' },
         { id: '17', name: 'Acqua Serena', category: 'Acquario', type: 'Estivo', price: 115, image: '/images/fountain17.jpg' },
@@ -88,7 +88,7 @@ const Collection: React.FC = () => {
         <>
             <Navbar />
             <div className="container">
-                <aside className="sidebar">
+                <aside className="filters-sidebar">
                     <div className="filter-box">
                         <h2 className="filter-title">
                             <button
@@ -166,7 +166,7 @@ const Collection: React.FC = () => {
                     </div>
                 </aside>
 
-                <main className="main">
+                <main className="content">
                     <div className="catalog-box">
                         <div className="header">
                             <h1 className="title">Catalog Produse</h1>
@@ -198,88 +198,116 @@ const Collection: React.FC = () => {
                 </main>
             </div>
 
-            // doar partea CSS din componenta Collection
-<style jsx>{`
-    .container {
-        display: flex;
-        flex-direction: column;
-        padding: 16px;
-    }
-    .filters-sidebar {
-        width: 250px;
-        padding: 16px;
-        background-color: #f9fafb;
-        border-right: 1px solid #e5e7eb;
-        position: sticky;
-        top: 16px;
-        height: fit-content;
-    }
-    .content {
-        flex: 1;
-        padding: 16px;
-    }
-    .toggle-filters-btn {
-        display: none;
-        margin-bottom: 16px;
-        padding: 8px 16px;
-        background-color: #2563eb;
-        color: white;
-        border: none;
-        border-radius: 6px;
-    }
+            {/* doar partea CSS din componenta Collection */}
+            <style jsx>{`
+                .container {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 16px;
+                }
+                .filters-sidebar {
+                    margin-bottom: 20px;
+                }
+                .filter-box {
+                    border: 1px solid #ddd;
+                    padding: 16px;
+                    border-radius: 8px;
+                }
+                .filter-title {
+                    margin: 0 0 8px;
+                    font-size: 1.2rem;
+                }
+                .filter-toggle {
+                    background: none;
+                    border: none;
+                    font-weight: 600;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 0;
+                }
+                .arrow {
+                    transition: transform 0.3s ease;
+                }
+                .arrow.open {
+                    transform: rotate(180deg);
+                }
+                .checkbox-group {
+                    max-height: 0;
+                    overflow: hidden;
+                    transition: max-height 0.3s ease;
+                    margin-bottom: 16px;
+                }
+                .checkbox-group.open {
+                    max-height: 500px; /* suficient să arate toate elementele */
+                }
+                .checkbox-label {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin-bottom: 8px;
+                    cursor: pointer;
+                    font-weight: 400;
+                }
+                .content {
+                    width: 100%;
+                }
+                .catalog-box {
+                    margin-top: 16px;
+                }
+                .header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 16px;
+                }
+                .title {
+                    margin: 0;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                }
+                .sort-select {
+                    padding: 6px 12px;
+                    font-size: 1rem;
+                    border-radius: 4px;
+                    border: 1px solid #ccc;
+                    cursor: pointer;
+                }
+                .product-grid {
+                    display: grid;
+                    gap: 24px;
+                    grid-template-columns: 1fr; /* 1 col pe mobil */
+                }
+                .empty-message {
+                    font-style: italic;
+                    color: #666;
+                }
 
-    .product-grid {
-        display: grid;
-        gap: 24px;
-        grid-template-columns: 1fr; /* 1 col pe mobil */
-    }
-
-    @media (min-width: 600px) {
-        .product-grid {
-            grid-template-columns: repeat(2, 1fr); /* 2 col tabletă mică */
-        }
-        .toggle-filters-btn {
-            display: none;
-        }
-    }
-
-    @media (min-width: 900px) {
-        .container {
-            flex-direction: row;
-        }
-        .filters-sidebar {
-            display: block;
-        }
-        .product-grid {
-            grid-template-columns: repeat(3, 1fr); /* 3 col tabletă mare */
-        }
-    }
-
-    @media (min-width: 1200px) {
-        .product-grid {
-            grid-template-columns: repeat(4, 1fr); /* 4 col desktop */
-        }
-    }
-
-    /* Stiluri pentru buton sortare */
-    .sort-select {
-        padding: 8px 12px;
-        border: 1px solid #9ca3af;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: border-color 0.3s ease;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-    .sort-select:hover,
-    .sort-select:focus {
-        border-color: #2563eb;
-        outline: none;
-    }
-`}</style>
-
+                /* Tablete */
+                @media (min-width: 640px) {
+                    .container {
+                        flex-direction: row;
+                    }
+                    .filters-sidebar {
+                        width: 220px;
+                        margin-right: 20px;
+                        margin-bottom: 0;
+                    }
+                    .content {
+                        flex-grow: 1;
+                    }
+                    .product-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                }
+                /* Desktop */
+                @media (min-width: 1024px) {
+                    .product-grid {
+                        grid-template-columns: repeat(4, 1fr);
+                    }
+                }
+            `}</style>
         </>
     );
 };
