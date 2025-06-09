@@ -35,7 +35,7 @@ const Collection: React.FC = () => {
         { id: '15', name: 'Fontana del Sole', category: 'Acquario', type: 'Invernale', price: 155, image: '/images/product_16.jpg' },
         { id: '16', name: 'Laguna Cristallina', category: 'Stagni', type: 'Estivo', price: 165, image: '/images/product_17.jpg' },
         { id: '17', name: 'Acqua Serena', category: 'Acquario', type: 'Estivo', price: 115, image: '/images/product_18.jpg' },
-        { id: '18', name: 'Stagno Tranquillo', category: 'Stagni', type: 'Invernale', price: 175, image: '/images/product_19.jpg' },
+        { id: '18', name: 'Stagno Tranquillo', category: 'Stagni', type: 'Invernale', price: 175, image: '/images/product_19.JPEG' },
         { id: '19', name: 'Fonte Arcobaleno', category: 'Acquario', type: 'Invernale', price: 185, image: '/images/product_20.jpg' },
         { id: '20', name: 'Laghetto Dorato', category: 'Stagni', type: 'Estivo', price: 195, image: '/images/product_21.jpg' },
     ];
