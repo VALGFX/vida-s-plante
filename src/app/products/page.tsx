@@ -5,7 +5,173 @@ import { ShopContext } from '@/context/ShopContext';
 import Navbar from "@/components/Navbar";
 
 // ... stiluri CSS rămân neschimbate
+const Container = styled.div`
+  margin-top: 90px;
+  display: flex;
+  flex-direction: column;
+    max-width: 80%;
+  gap: 32px;
+    border-radius: 20px;
+  background-color: #f7f8f7;
+    width: 100%;
+    max-width: 80%;
+    margin: 80px auto;
+  padding: 40px 8px;
+  
+  @media(min-width: 768px) {
+    flex-direction: row;
+    padding: 40px 40px;
+  }
+`;
 
+const Sidebar = styled.aside`
+  width: 100%;
+  max-width: 280px;
+  margin-bottom: 32px;
+  flex-shrink: 0;
+
+  @media(min-width: 768px) {
+    margin-bottom: 0;
+  }
+`;
+
+const FilterBox = styled.div`
+  background-color: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+              0 4px 6px -4px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 112px;
+`;
+
+const FilterTitle = styled.h2`
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  margin-bottom: 8px;
+  color: #1f2937;
+`;
+
+const FilterToggleButton = styled.button<{ open: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  user-select: none;
+
+  span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    transform: ${({ open }) => (open ? 'rotate(90deg)' : 'rotate(0deg)')};
+  }
+`;
+
+const CheckboxGroup = styled.div<{ open: boolean }>`
+  display: ${({ open }) => (open ? 'flex' : 'none')};
+  flex-direction: column;
+  gap: 12px;
+  background-color: #f7f8f7;
+  border-radius: 12px;
+  padding: 12px;
+`;
+
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4b5563;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    accent-color: #111;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+  }
+`;
+
+const Main = styled.main`
+  flex: 1;
+`;
+
+const CatalogBox = styled.div`
+  background-color: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+              0 4px 6px -4px rgb(0 0 0 / 0.1);
+  padding: 24px 40px;
+  margin-bottom: 24px;
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: center;
+  justify-content: space-between;
+
+  @media(min-width: 768px) {
+    flex-direction: row;
+  }
+`;
+
+const Title = styled.h1`
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: #1f2937;
+  margin: 0;
+`;
+
+const SortSelect = styled.select`
+  max-width: 280px;
+  width: 100%;
+  border-radius: 12px;
+  background-color: white;
+  padding: 8px 12px;
+  font-size: 1rem;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #2563eb;
+    color: #2563eb;
+  }
+`;
+
+const ProductGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+`;
+
+const EmptyMessage = styled.p`
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: #374151;
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 0;
+`;
 // Tipul Product (adaugă-l dacă nu e deja definit)
 type Product = {
   id: string;
