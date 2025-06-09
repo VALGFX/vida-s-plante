@@ -1,9 +1,8 @@
 // app/products/[id]/page.tsx
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import React from 'react'
 
-type Props = {
+interface ProductPageProps {
   params: { id: string }
 }
 
@@ -12,20 +11,19 @@ const DUMMY_PRODUCTS = [
     id: '1',
     name: 'Prodotto 1',
     description: 'Un produs de calitate superioară, ideal pentru uz zilnic.',
-    image: 'images/product_1.jpg',
+    image: '/images/product_1.jpg',
     price: 49.99,
   },
   {
     id: '2',
     name: 'Prodotto 2',
     description: 'Eleganță și funcționalitate într-un singur produs.',
-    image: 'images/product_1.jpg',
+    image: '/images/product_2.jpg',
     price: 59.99,
   },
-  // Adaugă mai multe produse după nevoie
 ]
 
-const ProductPage = ({ params }: Props) => {
+const ProductPage = async ({ params }: ProductPageProps) => {
   const product = DUMMY_PRODUCTS.find((p) => p.id === params.id)
 
   if (!product) return notFound()
@@ -36,9 +34,8 @@ const ProductPage = ({ params }: Props) => {
         <Image
           src={product.image}
           alt={product.name}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-xl"
+          fill
+          className="rounded-xl object-cover"
         />
       </div>
 
