@@ -1,8 +1,9 @@
 // src/app/products/[id]/page.tsx
-import Image from 'next/image'
-import { notFound } from 'next/navigation'
+'use client'
 
-// Dummy data pentru test
+import Image from 'next/image'
+import { useParams } from 'next/navigation'
+
 const DUMMY_PRODUCTS = [
   {
     id: '1',
@@ -20,11 +21,18 @@ const DUMMY_PRODUCTS = [
   },
 ]
 
-// Componenta corect tipată
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = DUMMY_PRODUCTS.find((p) => p.id === params.id)
+export default function ProductPage() {
+  const params = useParams()
+  const id = Array.isArray(params?.id) ? params.id[0] : params?.id
+  const product = DUMMY_PRODUCTS.find((p) => p.id === id)
 
-  if (!product) return notFound()
+  if (!product) {
+    return (
+      <div className="text-center text-red-500 text-xl mt-10">
+        Produsul nu a fost găsit.
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col lg:flex-row max-w-5xl mx-auto p-6 bg-white rounded-2xl shadow-md mt-10 gap-10">
