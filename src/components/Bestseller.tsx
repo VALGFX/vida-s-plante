@@ -7,31 +7,31 @@ const fakeProducts = [
   {
     _id: '1',
     name: 'Produs Bestseller 1',
-    image: ['/images/product1.jpg'],
+    image: ['/images/product_1.jpg'],
     price: 120,
   },
   {
     _id: '2',
     name: 'Produs Bestseller 2',
-    image: ['/images/product2.jpg'],
+    image: ['/images/product_1.jpg'],
     price: 90,
   },
   {
     _id: '3',
     name: 'Produs Bestseller 3',
-    image: ['/images/product3.jpg'],
+    image: ['/images/product_1.jpg'],
     price: 150,
   },
   {
     _id: '4',
     name: 'Produs Bestseller 4',
-    image: ['/images/product4.jpg'],
+    image: ['/images/product_1.jpg'],
     price: 80,
   },
   {
     _id: '5',
     name: 'Produs Bestseller 5',
-    image: ['/images/product5.jpg'],
+    image: ['/images/product_1.jpg'],
     price: 110,
   },
 ];
