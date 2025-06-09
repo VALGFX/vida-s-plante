@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
+import Navbar from "@/components/Navbar";
 
 const DUMMY_PRODUCTS = [
   {
@@ -48,6 +49,8 @@ export default function ProductPage() {
   if (!product) return <div className="text-red-600 text-center mt-10">Prodotto non trovato.</div>
 
   return (
+    <>
+      <Navbar />
     <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
       {/* Immagine principale */}
       <div>
@@ -146,5 +149,6 @@ export default function ProductPage() {
         </div>
       </div>
     </div>
+      </>
   )
 }
