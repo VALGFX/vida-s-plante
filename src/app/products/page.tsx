@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext, useEffect, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import ProductItem from '@/components/ProductItem';
