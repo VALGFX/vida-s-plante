@@ -2,6 +2,8 @@
 
 import React from 'react'
 import ProductItem from './ProductItem'
+import Image from 'next/image'
+
 
 const LatestCollection: React.FC = () => {
   // Date statice de exemplu (mock)
@@ -9,31 +11,61 @@ const LatestCollection: React.FC = () => {
     {
       _id: '1',
       name: 'Prodotto 1',
-      image: ['https://via.placeholder.com/300'],
+      image: ['/images/product_1.jpg'],
       price: 49.99,
     },
     {
       _id: '2',
       name: 'Prodotto 2',
-      image: ['https://via.placeholder.com/300'],
+      image: ['/images/product_1.jpg'],
       price: 59.99,
     },
     {
       _id: '3',
       name: 'Prodotto 3',
-      image: ['https://via.placeholder.com/300'],
+      image: ['/images/product_1.jpg'],
       price: 39.99,
     },
     {
       _id: '4',
       name: 'Prodotto 4',
-      image: ['https://via.placeholder.com/300'],
+      image: ['/images/product_1.jpg'],
       price: 29.99,
     },
     {
       _id: '5',
       name: 'Prodotto 5',
-      image: ['https://via.placeholder.com/300'],
+      image: ['/images/product_1.jpg'],
+      price: 79.99,
+    },
+    {
+      _id: '6',
+      name: 'Prodotto 6',
+      image: ['/images/product_1.jpg'],
+      price: 79.99,
+    },
+    {
+      _id: '7',
+      name: 'Prodotto 7',
+      image: ['/images/product_1.jpg'],
+      price: 79.99,
+    },
+    {
+      _id: '8',
+      name: 'Prodotto 8',
+      image: ['/images/product_1.jpg'],
+      price: 79.99,
+    },
+    {
+      _id: '9',
+      name: 'Prodotto 9',
+      image: ['/images/product_1.jpg'],
+      price: 79.99,
+    },
+    {
+      _id: '10',
+      name: 'Prodotto 10',
+      image: ['/images/product_1.jpg'],
       price: 79.99,
     },
     // ... mai poți adăuga produse mock dacă vrei
