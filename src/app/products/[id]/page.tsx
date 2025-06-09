@@ -1,7 +1,8 @@
-// app/products/[id]/page.tsx
+// src/app/products/[id]/page.tsx
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
+// Dummy data pentru test
 const DUMMY_PRODUCTS = [
   {
     id: '1',
@@ -19,7 +20,8 @@ const DUMMY_PRODUCTS = [
   },
 ]
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
+// Componenta corect tipată
+export default function ProductPage({ params }: { params: { id: string } }) {
   const product = DUMMY_PRODUCTS.find((p) => p.id === params.id)
 
   if (!product) return notFound()
