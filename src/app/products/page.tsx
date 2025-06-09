@@ -198,7 +198,7 @@ const Collection: React.FC = () => {
                 </main>
             </div>
 
-            {/* doar partea CSS din componenta Collection */}
+            {/* aici doar partea CSS din componenta Collection */}
             <style jsx>{`
                 .container {
                     display: flex;
