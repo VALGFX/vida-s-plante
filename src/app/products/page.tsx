@@ -216,9 +216,7 @@ const Collection: React.FC = () => {
       );
     }
 
-    if (category.length > 0) {
-      filtered = filtered.filter(item => category.includes(item.category));
-    }
+    
 
     if (type.length > 0) {
       filtered = filtered.filter(item => type.includes(item.type));
