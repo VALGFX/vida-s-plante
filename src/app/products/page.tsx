@@ -198,166 +198,88 @@ const Collection: React.FC = () => {
                 </main>
             </div>
 
-            <style jsx>{`
-                .container {
-                    margin-top: 90px;
-                    display: flex;
-                    flex-direction: column;
-                    max-width: 1200px;
-                    gap: 32px;
-                    border-radius: 20px;
-                    background-color: #f7f8f7;
-                    width: 100%;
-                    margin-left: auto;
-                    margin-right: auto;
-                    padding: 40px 16px;
-                }
-                @media(min-width: 768px) {
-                    .container {
-                        flex-direction: row;
-                        padding: 40px 40px;
-                    }
-                }
-                .sidebar {
-                    width: 100%;
-                    max-width: 280px;
-                    margin-bottom: 32px;
-                    flex-shrink: 0;
-                    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-                    background: white;
-                    border-radius: 24px;
-                }
-                @media(min-width: 768px) {
-                    .sidebar {
-                        margin-bottom: 0;
-                        position: sticky;
-                        top: 112px;
-                        height: fit-content;
-                    }
-                }
-                .filter-box {
-                    padding: 24px;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 24px;
-                }
-                .filter-title {
-                    font-size: 1.125rem;
-                    font-weight: 600;
-                    letter-spacing: 0.025em;
-                    margin-bottom: 8px;
-                    color: #1f2937;
-                }
-                .filter-toggle {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    width: 100%;
-                    text-align: left;
-                    font-weight: 500;
-                    color: #4b5563;
-                    margin-bottom: 8px;
-                    background: none;
-                    border: none;
-                    padding: 0;
-                    cursor: pointer;
-                    user-select: none;
-                }
-                .arrow {
-                    transform: rotate(0deg);
-                    transition: transform 0.3s ease;
-                }
-                .arrow.open {
-                    transform: rotate(90deg);
-                }
-                .checkbox-group {
-                    display: none;
-                    flex-direction: column;
-                    gap: 12px;
-                    background-color: #f7f8f7;
-                    border-radius: 12px;
-                    padding: 12px;
-                }
-                .checkbox-group.open {
-                    display: flex;
-                }
-                .checkbox-label {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    color: #4b5563;
-                    font-size: 0.875rem;
-                    font-weight: 400;
-                    cursor: pointer;
-                }
-                .checkbox-label input[type='checkbox'] {
-                    accent-color: #111;
-                    border-radius: 0.25rem;
-                    cursor: pointer;
-                    width: 18px;
-                    height: 18px;
-                }
-                .main {
-                    flex: 1;
-                }
-                .catalog-box {
-                    background-color: white;
-                    border-radius: 24px;
-                    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-                                0 4px 6px -4px rgb(0 0 0 / 0.1);
-                    padding: 32px;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 24px;
-                }
-                .header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    gap: 12px;
-                }
-                .title {
-                    font-weight: 700;
-                    font-size: 2rem;
-                    color: #111827;
-                }
-                .sort-select {
-                    border: 1px solid #d1d5db;
-                    padding: 8px 12px;
-                    border-radius: 8px;
-                    font-size: 1rem;
-                    cursor: pointer;
-                    outline: none;
-                    background-color: white;
-                    transition: border-color 0.3s ease;
-                }
-                .sort-select:hover,
-                .sort-select:focus {
-                    border-color: #2563eb;
-                }
-                .product-grid {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 24px;
-                }
-                @media (min-width: 768px) {
-                    .product-grid {
-                        grid-template-columns: repeat(3, 1fr);
-                    }
-                }
-                @media (min-width: 1024px) {
-                    .product-grid {
-                        grid-template-columns: repeat(4, 1fr);
-                    }
-                }
-                .empty-message {
-                    color: #6b7280;
-                    font-size: 1rem;
-                    text-align: center;
-                    padding: 32px 0;
-                }
-            `}</style>
+            // doar partea CSS din componenta Collection
+<style jsx>{`
+    .container {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+    }
+    .filters-sidebar {
+        width: 250px;
+        padding: 16px;
+        background-color: #f9fafb;
+        border-right: 1px solid #e5e7eb;
+        position: sticky;
+        top: 16px;
+        height: fit-content;
+    }
+    .content {
+        flex: 1;
+        padding: 16px;
+    }
+    .toggle-filters-btn {
+        display: none;
+        margin-bottom: 16px;
+        padding: 8px 16px;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 6px;
+    }
+
+    .product-grid {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: 1fr; /* 1 col pe mobil */
+    }
+
+    @media (min-width: 600px) {
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr); /* 2 col tabletă mică */
+        }
+        .toggle-filters-btn {
+            display: none;
+        }
+    }
+
+    @media (min-width: 900px) {
+        .container {
+            flex-direction: row;
+        }
+        .filters-sidebar {
+            display: block;
+        }
+        .product-grid {
+            grid-template-columns: repeat(3, 1fr); /* 3 col tabletă mare */
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .product-grid {
+            grid-template-columns: repeat(4, 1fr); /* 4 col desktop */
+        }
+    }
+
+    /* Stiluri pentru buton sortare */
+    .sort-select {
+        padding: 8px 12px;
+        border: 1px solid #9ca3af;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .sort-select:hover,
+    .sort-select:focus {
+        border-color: #2563eb;
+        outline: none;
+    }
+`}</style>
+
         </>
     );
 };
