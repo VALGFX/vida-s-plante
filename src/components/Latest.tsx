@@ -55,13 +55,12 @@ const LatestCollection: React.FC = () => {
 
       <div className="grid">
         {latestProducts.map((item) => (
-          <ProductItem
-            key={item._id}
-            id={item._id}
-            image={item.image}
-            name={item.name}
-            price={item.price}
-          />
+          <ProductItem key={item._id} item={{
+  id: item._id,
+  name: item.name,
+  image: item.image,
+  price: item.price
+}} />
         ))}
       </div>
 
