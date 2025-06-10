@@ -113,7 +113,7 @@ const styles = {
   },
 }
 
-// Media query helper pentru inline styles (simplu)
+// Hook pentru stiluri responsive
 function useResponsiveStyles() {
   const [windowWidth, setWindowWidth] = React.useState<number>(typeof window !== 'undefined' ? window.innerWidth : 1200)
 
@@ -125,20 +125,20 @@ function useResponsiveStyles() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Pentru mobil (<768px), adaptăm flexRow în coloană
-  const flexRowResponsive = {
+  const flexDirection: 'row' | 'column' = windowWidth < 768 ? 'column' : 'row'
+
+  const flexRowResponsive: React.CSSProperties = {
     ...styles.flexRow,
-    flexDirection: windowWidth < 768 ? 'column' : 'row',
-    alignItems: windowWidth < 768 ? 'center' : undefined,
+    flexDirection,
+    alignItems: flexDirection === 'column' ? 'center' : undefined,
   }
 
-  // imagine mai mică pe mobil
-  const imageResponsive = {
+  const imageResponsive: React.CSSProperties = {
     ...styles.image,
     maxWidth: windowWidth < 768 ? '90vw' : 400,
   }
 
-  return { flexRowResponsive, imageResponsive }
+  return { flexRowResponsive, imageResponsive, flexDirection }
 }
 
 const About: React.FC = () => {
@@ -146,7 +146,7 @@ const About: React.FC = () => {
   const [hoveredImg2, setHoveredImg2] = React.useState(false)
   const [hoveredCard, setHoveredCard] = React.useState<number | null>(null)
 
-  const { flexRowResponsive, imageResponsive } = useResponsiveStyles()
+  const { flexRowResponsive, imageResponsive, flexDirection } = useResponsiveStyles()
 
   return (
     <>
@@ -184,7 +184,11 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        <div style={{ ...flexRowResponsive, flexDirection: flexRowResponsive.flexDirection === 'row' ? 'row-reverse' : 'column', alignItems: flexRowResponsive.flexDirection === 'row' ? undefined : 'center' }}>
+        <div style={{
+          ...flexRowResponsive,
+          flexDirection: flexDirection === 'row' ? 'row-reverse' : 'column',
+          alignItems: flexDirection === 'row' ? undefined : 'center',
+        }}>
           <img
             src="/images/about-img-2.jpg"
             alt="Laghetto"
